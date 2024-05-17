@@ -1,0 +1,64 @@
+//the counter class
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class WordCounterApp extends JFrame{
+	  private JTextArea textArea;
+	    private JButton countButton;
+	    private JLabel resultLabel;
+
+	public WordCounterApp () {
+	    setTitle("Word Counter");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        textArea = new JTextArea();
+        countButton = new JButton("Count Words");
+        resultLabel = new JLabel("Word Count: 0");
+        setLayout(new BorderLayout());
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        JPanel southPanel = new JPanel();
+        southPanel.add(countButton);
+        southPanel.add(resultLabel);
+        add(southPanel, BorderLayout.SOUTH);
+        countButton.addActionListener(new ActionListener() {
+        
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				countwords();
+				
+			}
+        });
+	}
+	 private void countwords() {
+		 String text = textArea.getText();
+	        String[] words = text.trim().split("\\s+");
+	        int wordCount = words.length;
+	        if (text.trim().isEmpty()) {
+	            wordCount = 0;
+	        }
+	        resultLabel.setText("Word Count: " + wordCount);
+	 }
+}
+// main
+import javax.swing.*;
+
+public class task2 {
+
+	public static void main(String[] args) {
+		 SwingUtilities.invokeLater(new Runnable() {
+	            @Override
+	            public void run() {
+	                WordCounterApp app = new WordCounterApp();
+	                app.setVisible(true);
+	            }
+	        });
+	    }
+
+}
